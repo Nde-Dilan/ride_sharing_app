@@ -20,27 +20,39 @@ class WelcomePage extends StatelessWidget {
             children: <Widget>[
               Container(
                 width: screenWidth * 0.75, // 75% of screen width
-                height: screenHeight * 0.5, // 40% of screen height
+                height: screenHeight * 0.4, // 40% of screen height
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 decoration: const BoxDecoration(
                     shape: BoxShape.rectangle,
                     color: Color.fromARGB(31, 255, 255, 255)),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 0.0),
-                  child: SvgPicture.asset("assets/icons/ride_share.svg"),
+                  child: SvgPicture.asset("assets/icons/ride_share_logo.svg"),
                 ),
               ),
               const SizedBox(
-                height: 48,
+                height: 28,
               ),
               SizedBox(
                   width: screenWidth * 0.75, // 75% of screen width
                   child: const Center(
-                    child: Text("RideShare",
+                    child: Text("RideShare 🔥🚀",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.bold)),
+                  )),
+              SizedBox(
+                  width: screenWidth * 0.75, // 75% of screen width
+                  child: const Center(
+                    child: Text(
+                        "RideShare 🚀 is a carpooling app that connects drivers and passengers in real-time. Join us now and enjoy the ride! 🚗",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.italic,
+                            color: Color.fromARGB(255, 126, 63, 63),
                             fontWeight: FontWeight.bold)),
                   )),
               SizedBox(
@@ -146,7 +158,7 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 80,
+                height: 60,
               ),
               const Text("2023 © RideShare"),
               const SizedBox(
