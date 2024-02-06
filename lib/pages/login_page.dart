@@ -59,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           TextFormField(
                             controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               labelText: 'Email',
                               border: OutlineInputBorder(
@@ -123,45 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           orPart(),
-                          TextButton(
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  side: const BorderSide(
-                                    color: Color(0xFFFF742F),
-                                    width: 2.0,
-                                    style: BorderStyle.solid,
-                                  ),
-                                ),
-                              ),
-                              minimumSize: MaterialStateProperty.all<Size?>(
-                                  const Size(303, 54)),
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color?>(
-                                      const Color(0xFFFFFFFF)),
-                            ),
-                            onPressed: () => {print("Sign In With Google")},
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.g_mobiledata_outlined,
-                                  color: Color(0xffFF742F),
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Sign In With Google",
-                                  style: TextStyle(
-                                    fontSize: 19,
-                                    color: Color(0xffFF742F),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                          signInWithGoogleBtn()],
                       ),
                     ),
                   );

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 -2 19.991 19.991" xmlns="http://www.w3.org/2000/svg">
+  <g id="taxi" transform="translate(-2.01 -4)">
+    <path id="secondary" fill="#FF742F" d="M20.24,11.81,17,11H5l-1.44.71a1,1,0,0,0-.55.9V16a1,1,0,0,0,1,1H5a2,2,0,0,1,4,0h6a2,2,0,0,1,4,0h1a1,1,0,0,0,1-1V12.78A1,1,0,0,0,20.24,11.81Z"/>
+    <path id="primary" d="M19,17h1a1,1,0,0,0,1-1V12.78a1,1,0,0,0-.76-1L17,11,14.3,7.4a1,1,0,0,0-.8-.4H7.62a1,1,0,0,0-.9.55L5,11l-1.44.71a1,1,0,0,0-.55.9V16a1,1,0,0,0,1,1H5" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    <path id="primary-2" data-name="primary" d="M12,7H10V5h2Zm3,10H9m2-6V7M5,11H17M7,15a2,2,0,1,0,2,2A2,2,0,0,0,7,15Zm10,0a2,2,0,1,0,2,2A2,2,0,0,0,17,15Z" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+  </g>
+</svg>

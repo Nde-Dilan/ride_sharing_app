@@ -9,9 +9,9 @@
     
     
     <application
-        android:label="ride_sharing_app"
+        android:label="RideShare🚀"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         >
         
         

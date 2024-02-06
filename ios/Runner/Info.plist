@@ -49,6 +49,9 @@
 	<key>I want to use ur location</key>
 	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
 	<key>I want to use ur location</key>
-	
+	<key>CFBundleName</key>
+<string>RideShare🚀</string>
+<key>CFBundleDisplayName</key>
+<string>RideShare🚀</string>
 </dict>
 </plist>

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,11 @@ import 'package:image_picker/image_picker.dart';
 //firebase stuff
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ride_sharing_app/widgets/checkbox.dart';
+import 'package:ride_sharing_app/widgets/phone_number.dart';
 import '../firebase_options.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -22,16 +27,17 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // final storage = FirebaseStorage.instance;
-  String dropdownValue = '+237';
+  final TextEditingController _phoneController = TextEditingController();
+  final bool _isDriver = false;
+  String cniImage = "No Image Uploaded";
+  // String dropdownValue = '+237';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('🚔🚨RideShare 🔥🚀'),
+        title: const Text('🚔🚨 RideShare 🔥🚀'),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
@@ -94,49 +100,23 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(
                           height: 48,
                         ),
-                        phone_number_section(),
+                        PhoneInput(phoneController: _phoneController),
                         const SizedBox(
-                          height: 48,
+                          height: 28,
                         ),
-                        orPart(),
-                        signInWithGoogle(),
+                        CheckBox(isDriver: _isDriver),
                         const SizedBox(
-                          height: 48,
+                          height: 18,
                         ),
                         cniUploadPart(),
-                        TextButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: const BorderSide(
-                                  color: Color(0xFFFF742F),
-                                  width: 2.0,
-                                  style: BorderStyle.solid,
-                                ),
-                              ),
-                            ),
-                            minimumSize: MaterialStateProperty.all<Size?>(
-                                const Size(303, 54)),
-                            backgroundColor: MaterialStateProperty.all<Color?>(
-                                const Color(0xFFFFFFFF)),
-                          ),
-                          onPressed: () async {
-                            createAnAccount(context);
-                          },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Create Your Account",
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  color: Color(0xffFF742F),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        CreatYourAccountBtn(context),
+                        orPart(),
+                        signInWithGoogleBtn(),
+                        const SizedBox(
+                          height: 18,
                         ),
                       ],
                     ),
@@ -150,6 +130,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: screenHeight * 0.5,
                   ),
                   const CircularProgressIndicator(),
+                  const SizedBox(
+                    height: 18,
+                  ),
                   const Text("Loading ... ")
                 ]));
             }
@@ -159,7 +142,45 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  TextButton CreatYourAccountBtn(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+            side: const BorderSide(
+              color: Color(0xFFFF742F),
+              width: 2.0,
+              style: BorderStyle.solid,
+            ),
+          ),
+        ),
+        minimumSize: MaterialStateProperty.all<Size?>(const Size(303, 54)),
+        backgroundColor:
+            MaterialStateProperty.all<Color?>(const Color(0xFFFFFFFF)),
+      ),
+      onPressed: () async {
+        createAnAccount(context);
+      },
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Create Your Account",
+            style: TextStyle(
+              fontSize: 19,
+              color: Color(0xffFF742F),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Row cniUploadPart() {
+    String textMessage = "No files here";
+
     return Row(
       children: <Widget>[
         const Text("Upload CNI Image",
@@ -190,93 +211,18 @@ class _SignUpPageState extends State<SignUpPage> {
               // Get the download URL
               await uploadTask.whenComplete(() async {
                 String downloadURL = await ref.getDownloadURL();
+                cniImage = downloadURL;
                 print('File Uploaded: $downloadURL');
+                textMessage = "File Uploaded";
               }).catchError((onError) {
                 print(onError);
+                // return "Error";
               });
             } else {
               print("No file selected");
             }
           },
-          child: const Text('No files here'),
-        ),
-      ],
-    );
-  }
-
-  TextButton signInWithGoogle() {
-    return TextButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-            side: const BorderSide(
-              color: Color(0xFFFF742F),
-              width: 2.0,
-              style: BorderStyle.solid,
-            ),
-          ),
-        ),
-        minimumSize: MaterialStateProperty.all<Size?>(const Size(303, 54)),
-        backgroundColor:
-            MaterialStateProperty.all<Color?>(const Color(0xFFFFFFFF)),
-      ),
-      onPressed: () => {print("Sign In With Google")},
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.g_mobiledata_outlined,
-            color: Color(0xffFF742F),
-          ),
-          SizedBox(width: 10),
-          Text(
-            "Sign In With Google",
-            style: TextStyle(
-              fontSize: 19,
-              color: Color(0xffFF742F),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Row phone_number_section() {
-    return Row(
-      children: <Widget>[
-        DropdownButton<String>(
-          value: dropdownValue, // Add this line
-          items: <String>['+247', '+91', '+33', '+237'].map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
-          },
-        ),
-        Expanded(
-          child: TextFormField(
-            keyboardType: TextInputType.phone,
-            controller: _phoneController,
-            decoration: InputDecoration(
-              labelText: 'Phone Number',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0), // Add this line
-              ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter your phone number';
-              }
-              return null;
-            },
-          ),
+          child: Text(textMessage),
         ),
       ],
     );
@@ -285,7 +231,8 @@ class _SignUpPageState extends State<SignUpPage> {
   void createAnAccount(BuildContext context) async {
     final email = _emailController.text;
     final password = _passwordController.text;
-    // final phoneNumber = _phoneController.text;
+    final phoneNumber = _phoneController.text;
+    final isDriver = _isDriver;
 
     if (_formKey.currentState!.validate()) {
       try {
@@ -295,7 +242,32 @@ class _SignUpPageState extends State<SignUpPage> {
           password: password,
         );
         print(credential);
-        Navigator.pushNamed(context, '/sign-in');
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Account created successfully'),
+          ),
+        );
+        //Create a collection in firestore for the user, and take the
+        // Create a new user with a first and last name
+        final user = <String, dynamic>{
+          "CNIImage": cniImage,
+          "email": email,
+          "isDriver": isDriver,
+          "phone number": phoneNumber,
+          "user_id": credential.user?.uid,
+          "username": email.split('@').first,
+        };
+
+        final db = FirebaseFirestore.instance;
+
+        // Add a new document with a generated ID
+        await db.collection("users").add(user).then((DocumentReference doc) =>
+            print('DocumentSnapshot added with ID: ${doc.id}'));
+        // ignore: use_build_context_synchronously
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pushNamed(context, '/sign-in');
+        });
         // ignore: nullable_type_in_catch_clause
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
@@ -323,7 +295,7 @@ validateEmail(String? value) {
 
 Padding orPart() {
   return const Padding(
-    padding: EdgeInsets.symmetric(vertical: 20.0),
+    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
     child: Row(
       children: <Widget>[
         Expanded(
@@ -345,4 +317,64 @@ Padding orPart() {
       ],
     ),
   );
+}
+
+TextButton signInWithGoogleBtn() {
+  return TextButton(
+    onPressed: () async {
+      UserCredential user = await signInWithGoogle();
+      print(user.user?.displayName);
+    },
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+          side: const BorderSide(
+            color: Color(0xFFFF742F),
+            width: 2.0,
+            style: BorderStyle.solid,
+          ),
+        ),
+      ),
+      minimumSize: MaterialStateProperty.all<Size?>(const Size(303, 54)),
+      backgroundColor:
+          MaterialStateProperty.all<Color?>(const Color(0xFFFFFFFF)),
+    ),
+    child: const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.g_mobiledata_outlined,
+          color: Color(0xffFF742F),
+        ),
+        SizedBox(width: 10),
+        Text(
+          "Sign In With Google",
+          style: TextStyle(
+            fontSize: 19,
+            color: Color(0xffFF742F),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+  // Create a new credential
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }

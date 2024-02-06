@@ -18,22 +18,27 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              const SizedBox(
+                height: 100,
+              ),
               Container(
                 width: screenWidth * 0.75, // 75% of screen width
                 height: screenHeight * 0.4, // 40% of screen height
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Color.fromARGB(31, 255, 255, 255)),
+                  shape: BoxShape.rectangle,
+                  // color: Color.fromARGB(31, 240, 84, 84)
+                ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 0.0),
-                  child: SvgPicture.asset("assets/icons/ride_share_logo.svg"),
+                  child: SvgPicture.asset("assets/icons/taxi-svgrepo-com.svg"),
                 ),
               ),
               const SizedBox(
-                height: 28,
+                height: 48,
               ),
               SizedBox(
+                  height: 48,
                   width: screenWidth * 0.75, // 75% of screen width
                   child: const Center(
                     child: Text("RideShare 🔥🚀",
@@ -52,7 +57,7 @@ class WelcomePage extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20,
                             fontStyle: FontStyle.italic,
-                            color: Color.fromARGB(255, 126, 63, 63),
+                            color: Color(0xffFF742F),
                             fontWeight: FontWeight.bold)),
                   )),
               SizedBox(
@@ -110,29 +115,7 @@ class WelcomePage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Divider(
-                        color: Colors.black,
-                        height: 1.5,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text("Or"),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.black,
-                        height: 1.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              orPart(),
               TextButton(
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
