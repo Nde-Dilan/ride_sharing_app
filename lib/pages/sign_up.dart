@@ -266,7 +266,8 @@ class _SignUpPageState extends State<SignUpPage> {
             print('DocumentSnapshot added with ID: ${doc.id}'));
         // ignore: use_build_context_synchronously
         Future.delayed(const Duration(seconds: 2), () {
-          Navigator.pushNamed(context, '/sign-in');
+          Navigator.pushNamed(context, '/sign-in',
+              arguments: email.split('@').first);
         });
         // ignore: nullable_type_in_catch_clause
       } on FirebaseAuthException catch (e) {

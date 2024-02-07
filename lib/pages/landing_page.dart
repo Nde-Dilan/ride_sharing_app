@@ -31,11 +31,8 @@ class WelcomePage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 0.0),
-                  child: SvgPicture.asset("assets/icons/taxi-svgrepo-com.svg"),
+                  child: SvgPicture.asset("assets/icons/ride_share_new.svg"),
                 ),
-              ),
-              const SizedBox(
-                height: 48,
               ),
               SizedBox(
                   height: 48,

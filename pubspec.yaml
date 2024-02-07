@@ -37,17 +37,19 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.9
   image_picker: ^1.0.7
-  firebase_storage: ^11.6.0
+  firebase_storage: ^11.6.5
   firebase_core: ^2.24.2
   permission_handler: ^11.0.1
   google_maps_flutter: ^2.5.3
   flutter_polyline_points: ^2.0.0
   location: ^5.0.3
-  firebase_auth: ^4.17.3
+  firebase_auth: ^4.17.4
   flutter_launcher_icons: ^0.13.1
   google_sign_in: ^6.2.1
-  cloud_firestore: ^4.15.3
+  cloud_firestore: ^4.15.4
   firebase_core_platform_interface: ^5.0.0
+  flutter_rating_bar: ^4.0.1
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

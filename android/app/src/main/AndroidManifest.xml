@@ -6,10 +6,11 @@
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> 
     
     
     <application
-        android:label="RideShare🚀"
+        android:label="RideShare 🚀"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"
         >
@@ -42,6 +43,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
             <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyBEK8mpjkwNXSjmNXOHwiBaXf0-F4H8ljM"/>
+               android:value="AIzaSyDXhM3t-i2ZfiPiG0AZYKJMDqm-ZVZSnUY"/>
     </application>
 </manifest>

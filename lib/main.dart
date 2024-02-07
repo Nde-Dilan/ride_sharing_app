@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+
       initialRoute: '/',
       routes: {
         '/sign-up': (context) => const SignUpPage(),
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 233, 92, 50)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MapPage(),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

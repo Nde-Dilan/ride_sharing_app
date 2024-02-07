@@ -18,6 +18,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments;
+    String username;
+
+    if (args != null) {
+      username = args as String;
+    } else {
+      username = "Mr/Mrs";
+    }
     return Scaffold(
         appBar: AppBar(
           title: const Text('🚔🚨RideShare 🔥🚀'),
@@ -43,9 +51,9 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(
                             height: 48,
                           ),
-                          const Text(
-                            'Hi Mr/Mme, Wecome Back! 👋',
-                            style: TextStyle(fontSize: 24),
+                          Text(
+                            'Hi $username, Wecome Back! 👋',
+                            style: const TextStyle(fontSize: 24),
                           ),
                           const SizedBox(
                             height: 18,
@@ -124,7 +132,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           orPart(),
-                          signInWithGoogleBtn()],
+                          signInWithGoogleBtn()
+                        ],
                       ),
                     ),
                   );
