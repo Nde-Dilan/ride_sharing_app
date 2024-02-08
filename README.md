@@ -27,7 +27,7 @@ Follow these steps to get the app up and running!
 Download or clone this repo by using the link below:
 
 ```sh
-git clone https://github.com/yourusername/ride_sharing_app.git 
+git clone https://github.com/Nde-Dilan/ride_sharing_app.git 
 ```
 **Step 2:**
 
@@ -40,7 +40,7 @@ flutter pub get
 
 Navigate to the project directory in terminal and run the app:
 
-## 🧪 Running the tests (the default one 🥲)
+## 🧪 Running the tests (the default ones 🥲)
 Execute the following command in console to run the tests:
 
 ```sh
@@ -52,7 +52,7 @@ flutter test
  * Dart - Optimized for UI, development with less code.
 
 ## 🤝 Contributing
-Contributions, issues and feature requests are welcome! See CONTRIBUTING.md for guidelines.
+Contributions, issues and feature requests are welcome! 
 
 ## 👥 Authors
 **Nde Dilan** - Initial work - Nde-Dilan
