@@ -28,12 +28,3 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
-
-/**
- * E/Google Android Maps SDK(11191): Authorization failure.  Please see https://developers.google.com/maps/documentation/android-sdk/start for how to correctly set up the map.
-E/Google Android Maps SDK(11191): In the Google Developer Console (https://console.developers.google.com)
-E/Google Android Maps SDK(11191): Ensure that the "Maps SDK for Android" is enabled.
-E/Google Android Maps SDK(11191): Ensure that the following Android Key exists:
-E/Google Android Maps SDK(11191): 	API Key: AIzaSyDJND-vHwJxAFkRfdfn1tyK8P-RqtiLu2g
-E/Google Android Maps SDK(11191): 	Android Application (<cert_fingerprint>;<package_name>): D6:BB:58:E4:78:81:45:55:77:6A:45:CD:5F:9C:E3:8D:47:43:51:3E;com.example.ride_sharing_app
- */

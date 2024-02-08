@@ -17,15 +17,23 @@ class _MapPageState extends State<MapPage> {
   Location locationController = Location();
 
   static const LatLng driver2Position =
-      LatLng(3.8780000141637663, 11.516530312595192);
+       LatLng(3.951479764903749, 11.516876187997934);
   static const LatLng driver1Position =
-      LatLng(3.9458546821800256, 11.522115494775276);
+      LatLng(3.9322991741267597, 11.519730058376451);
   LatLng? currentPosition;
 
   @override
   void initState() {
     super.initState();
-    getLocationUpdate(locationController, currentPosition, setState);
+    asyncInitState();
+    _addMarkers();
+  }
+
+  void asyncInitState() async {
+    currentPosition =
+        await getLocationUpdate(locationController, currentPosition, setState);
+    currentPosition = const LatLng(3.951479764903749, 11.516876187997934);
+    // print("This is inside the initState $currentPosition");
     _addMarkers();
   }
 
@@ -46,7 +54,7 @@ class _MapPageState extends State<MapPage> {
           : GoogleMap(
               initialCameraPosition:
                   const CameraPosition(target: driver2Position, zoom: 14),
-              markers: {_markers.elementAt(0), _markers.elementAt(1)},
+              markers: {_markers.elementAt(2), _markers.elementAt(0)},
             ),
     );
   }
@@ -54,16 +62,16 @@ class _MapPageState extends State<MapPage> {
   void _addMarkers() async {
     final BitmapDescriptor driverIcon1 =
         await bitmapDescriptorFromSvgAsset('assets/icons/red_car.svg');
-    final Marker sourceMarker = Marker(
-      markerId: const MarkerId('Driver'),
-      infoWindow: const InfoWindow(title: "Car Driver", snippet: "Cameroon"),
-      icon: driverIcon1,
+    final Marker driver1Marker = const Marker(
+      markerId: MarkerId('Driver'),
+      infoWindow: InfoWindow(title: "Car Driver", snippet: "Cameroon"),
+      // icon: driverIcon1,
       position: driver1Position,
     );
 
     final BitmapDescriptor driverIcon2 =
-        await bitmapDescriptorFromSvgAsset('assets/icons/green_bus.svg');
-    final Marker ubaMarker = Marker(
+        await bitmapDescriptorFromSvgAsset('assets/icons/green_car.svg');
+    final Marker driver2Marker = Marker(
       markerId: const MarkerId('Driver 2'),
       infoWindow: const InfoWindow(title: "Car Driver", snippet: "Cameroon"),
       icon: driverIcon2,
@@ -77,13 +85,13 @@ class _MapPageState extends State<MapPage> {
       infoWindow:
           const InfoWindow(title: "Current Position", snippet: "Passenger"),
       icon: passengerIcon, //TODO: Change the position to the current position
-      position: const LatLng(3.9458546821800256, 11.522115494775276),
+      position: currentPosition!,
     );
 
     setState(() {
       _markers
-        ..add(sourceMarker)
-        ..add(ubaMarker)
+        ..add(driver1Marker)
+        ..add(driver2Marker)
         ..add(currentMarker);
     });
   }
