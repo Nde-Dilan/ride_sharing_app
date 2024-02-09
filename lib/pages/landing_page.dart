@@ -11,6 +11,8 @@ class WelcomePage extends StatelessWidget {
     // Get the screen size
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
+    double _fontSizeText = 20;
+    double adjustedFontSize = _fontSizeText * screenWidth / 400;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -19,11 +21,11 @@ class WelcomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(
-                height: 100,
-              ),
+                  // height: 100,
+                  ),
               Container(
                 width: screenWidth * 0.75, // 75% of screen width
-                height: screenHeight * 0.4, // 40% of screen height
+                height: screenHeight * 0.3, // 40% of screen height
                 padding: const EdgeInsets.only(left: 10, top: 10),
                 decoration: const BoxDecoration(
                   shape: BoxShape.rectangle,
@@ -37,24 +39,24 @@ class WelcomePage extends StatelessWidget {
               SizedBox(
                   height: 48,
                   width: screenWidth * 0.75, // 75% of screen width
-                  child: const Center(
+                  child: Center(
                     child: Text("RideShare 🔥🚀",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontSize: adjustedFontSize,
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontWeight: FontWeight.bold)),
                   )),
               SizedBox(
                   width: screenWidth * 0.75, // 75% of screen width
-                  child: const Center(
+                  child: Center(
                     child: Text(
                         "RideShare 🚀 is a carpooling app that connects drivers and passengers in real-time. Join us now and enjoy the ride! 🚗",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: adjustedFontSize,
                             fontStyle: FontStyle.italic,
-                            color: Color(0xffFF742F),
+                            color: const Color(0xffFF742F),
                             fontWeight: FontWeight.bold)),
                   )),
               SizedBox(
@@ -95,7 +97,8 @@ class WelcomePage extends StatelessWidget {
                           style:
                               BorderStyle.solid), // Adjust the radius as needed
                     )),
-                    minimumSize: const MaterialStatePropertyAll(Size(303, 54)),
+                    minimumSize: MaterialStatePropertyAll(
+                        Size(303 * screenWidth / 400, 54)),
                     backgroundColor:
                         const MaterialStatePropertyAll(Color(0xffffffff))),
                 onPressed: () => {
@@ -104,10 +107,10 @@ class WelcomePage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const LoginPage()))
                 },
-                child: const Text(
+                child: Text(
                   "Sign In",
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 15 * screenWidth / 400,
                       color: Color(0xffFF742F), //6350FF
                       fontWeight: FontWeight.w500),
                 ),
@@ -120,7 +123,8 @@ class WelcomePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                           15.0), // Adjust the radius as needed
                     )),
-                    minimumSize: const MaterialStatePropertyAll(Size(303, 54)),
+                    minimumSize: MaterialStatePropertyAll(
+                        Size(303 * screenWidth / 400, 54)),
                     backgroundColor:
                         const MaterialStatePropertyAll(Color(0xffFF742F))),
                 onPressed: () => {
@@ -129,19 +133,19 @@ class WelcomePage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const SignUpPage()))
                 },
-                child: const Text(
+                child: Text(
                   "Sign Up",
                   style: TextStyle(
-                      fontSize: 15,
-                      color: Color(0xffFFFFFF), //6350FF
+                      fontSize: 15 * screenWidth / 400,
+                      color: const Color(0xffFFFFFF), //6350FF
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 60,
               ),
               const Text("2023 © RideShare"),
-              const SizedBox(
+              SizedBox(
                 height: 80,
               ),
             ],
@@ -152,13 +156,14 @@ class WelcomePage extends StatelessWidget {
   }
 
   buildClickableText(String s, BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {},
       child: Text(s,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-              fontSize: 15,
-              color: Color(0xff6350FF), //6350FF
+          style: TextStyle(
+              fontSize: 15 * screenWidth / 400,
+              color: const Color(0xff6350FF), //6350FF
               fontWeight: FontWeight.w500)),
     );
   }

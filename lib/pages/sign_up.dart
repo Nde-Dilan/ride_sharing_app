@@ -35,114 +35,91 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('🚔🚨 RideShare 🔥🚀'),
-      ),
-      body: SingleChildScrollView(
-        child: FutureBuilder(
-          future: Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
-          ),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return Padding(
-                  padding: const EdgeInsets.all(19.0),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        const Text(
-                          'Create an acount',
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        const SizedBox(
-                          height: 48,
-                        ),
-                        TextFormField(
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10.0), // Add this line
-                            ),
-                          ),
-                          validator: (value) {
-                            validateEmail(value!);
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 48,
-                        ),
-                        TextFormField(
-                          controller: _passwordController,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.circular(10.0), // Add this line
-                            ),
-                          ),
-                          obscureText: true,
-                          enableSuggestions: false,
-                          autocorrect: false,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 48,
-                        ),
-                        PhoneInput(phoneController: _phoneController),
-                        const SizedBox(
-                          height: 28,
-                        ),
-                        CheckBox(isDriver: _isDriver),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        cniUploadPart(),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        CreatYourAccountBtn(context),
-                        orPart(),
-                        signInWithGoogleBtn(),
-                        const SizedBox(
-                          height: 18,
-                        ),
-                      ],
+        appBar: AppBar(
+          title: const Text('🚔🚨 RideShare 🔥🚀'),
+        ),
+        body: SingleChildScrollView(
+            child: Padding(
+          padding: const EdgeInsets.all(19.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'Create an acount',
+                  style: TextStyle(fontSize: 24 * screenWidth / 400),
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Add this line
                     ),
                   ),
-                );
-              default:
-                final double screenHeight = MediaQuery.of(context).size.height;
-                return Center(
-                    child: Column(children: [
-                  SizedBox(
-                    height: screenHeight * 0.5,
+                  validator: (value) {
+                    validateEmail(value!);
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(10.0), // Add this line
+                    ),
                   ),
-                  const CircularProgressIndicator(),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  const Text("Loading ... ")
-                ]));
-            }
-          },
-        ),
-      ),
-    );
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                PhoneInput(phoneController: _phoneController),
+                const SizedBox(
+                  height: 28,
+                ),
+                CheckBox(isDriver: _isDriver),
+                const SizedBox(
+                  height: 18,
+                ),
+                cniUploadPart(),
+                const SizedBox(
+                  height: 18,
+                ),
+                CreatYourAccountBtn(context),
+                orPart(),
+                signInWithGoogleBtn(context),
+                const SizedBox(
+                  height: 18,
+                ),
+              ],
+            ),
+          ),
+        )));
   }
 
   TextButton CreatYourAccountBtn(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
     return TextButton(
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
@@ -155,21 +132,22 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ),
-        minimumSize: MaterialStateProperty.all<Size?>(const Size(303, 54)),
+        minimumSize:
+            MaterialStateProperty.all<Size?>(Size(303 * screenWidth / 400, 54)),
         backgroundColor:
             MaterialStateProperty.all<Color?>(const Color(0xFFFFFFFF)),
       ),
       onPressed: () async {
         createAnAccount(context);
       },
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "Create Your Account",
             style: TextStyle(
-              fontSize: 19,
-              color: Color(0xffFF742F),
+              fontSize: 19 * screenWidth / 400,
+              color: const Color(0xffFF742F),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -180,16 +158,17 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Row cniUploadPart() {
     String textMessage = "No files here";
+    final double screenWidth = MediaQuery.of(context).size.width;
 
     return Row(
       children: <Widget>[
-        const Text("Upload CNI Image",
+        Text("Upload CNI Image",
             style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 0, 0, 0),
+                fontSize: 20 * screenWidth / 400,
+                color: const Color.fromARGB(255, 0, 0, 0),
                 fontWeight: FontWeight.bold)),
-        const SizedBox(
-          width: 14,
+        SizedBox(
+          width: 14 * screenWidth / 400,
         ),
         ElevatedButton(
           onPressed: () async {
@@ -320,11 +299,15 @@ Padding orPart() {
   );
 }
 
-TextButton signInWithGoogleBtn() {
+TextButton signInWithGoogleBtn(BuildContext context) {
+  final double screenWidth = MediaQuery.of(context).size.width;
+
   return TextButton(
     onPressed: () async {
       UserCredential user = await signInWithGoogle();
-      print(user.user?.displayName);
+      if (user?.user?.displayName != null) {
+        Navigator.pushNamed(context, '/home-page');
+      }
     },
     style: ButtonStyle(
       shape: MaterialStateProperty.all(
@@ -337,23 +320,24 @@ TextButton signInWithGoogleBtn() {
           ),
         ),
       ),
-      minimumSize: MaterialStateProperty.all<Size?>(const Size(303, 54)),
+      minimumSize:
+          MaterialStateProperty.all<Size?>(Size(303 * screenWidth / 400, 54)),
       backgroundColor:
           MaterialStateProperty.all<Color?>(const Color(0xFFFFFFFF)),
     ),
-    child: const Row(
+    child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.g_mobiledata_outlined,
           color: Color(0xffFF742F),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: 10 * screenWidth / 400),
         Text(
           "Sign In With Google",
           style: TextStyle(
-            fontSize: 19,
-            color: Color(0xffFF742F),
+            fontSize: 19 * screenWidth / 400,
+            color: const Color(0xffFF742F),
             fontWeight: FontWeight.w500,
           ),
         ),

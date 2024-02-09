@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:ride_sharing_app/firebase_options.dart';
 import 'package:ride_sharing_app/pages/home_page.dart';
 import 'package:ride_sharing_app/pages/landing_page.dart';
 import 'package:ride_sharing_app/pages/login_page.dart';
@@ -7,6 +9,8 @@ import 'package:ride_sharing_app/pages/sign_up.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
@@ -20,6 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
 
       initialRoute: '/',
+
       routes: {
         '/sign-up': (context) => const SignUpPage(),
         '/sign-in': (context) => const LoginPage(),
@@ -31,8 +36,8 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 233, 92, 50)),
         useMaterial3: true,
       ),
-      home: const MapPage(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MapPage(),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
@@ -51,9 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.camera,
       Permission.photos,
+      Permission.location,
+      Permission.locationAlways,
     ].request();
-    print(statuses[Permission.camera]);
-    print(statuses[Permission.photos]);
+    // print(statuses[Permission.camera]);
+    // print(statuses[Permission.photos]);
   }
 
   @override

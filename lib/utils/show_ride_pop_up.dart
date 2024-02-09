@@ -1,13 +1,14 @@
-
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ride_sharing_app/driver.dart';
 
 void showRiderPopup(RiderData riderData, BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => Container(
+  final double screenWidth = MediaQuery.of(context).size.width;
+  final double _fontSize = screenWidth * 0.05;
+  showModalBottomSheet(
+    context: context,
+    builder: (context) => SingleChildScrollView(
+      child: Container(
         // height: 500,
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
@@ -29,49 +30,69 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
             const SizedBox(height: 25),
             Row(
               children: [
-                const Text(
+                Text(
                   "Name: ",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: _fontSize),
                 ),
                 Text(riderData.name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: _fontSize)),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               children: [
-                const Text(
+                Text(
                   "Vehicle: ",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: _fontSize),
                 ),
                 Text(riderData.vehicleType,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: _fontSize)),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               children: [
-                const Text(
+                Text(
                   "Rating: ",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: _fontSize),
                 ),
-                Text("${riderData.rating}/6 (over 500 ratings)",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
+                Expanded(
+                  child: RatingBar.builder(
+                    initialRating: 3,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      size: 1,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {
+                      print(rating);
+                    },
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 20),
             Row(
               children: [
-                const Text(
+                Text(
                   "Available: ",
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: _fontSize),
                 ),
-                Text(riderData.isActive ? "True" : "False",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    color: riderData.isActive ? Colors.green : Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 30),
@@ -95,11 +116,12 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
                     minimumSize:
                         MaterialStatePropertyAll(Size(screenWidth * 0.25, 54)),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Cancel",
                     style: TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 255, 255, 255), //6350FF
+                        fontSize: _fontSize,
+                        color:
+                            const Color.fromARGB(255, 255, 255, 255), //6350FF
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -122,13 +144,14 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
                               BorderStyle.solid), // Adjust the radius as needed
                     )),
                     minimumSize:
-                        MaterialStatePropertyAll(Size(screenWidth * 0.25, 54)),
+                        MaterialStatePropertyAll(Size(screenWidth * 0.15, 54)),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Call Driver",
                     style: TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 255, 255, 255), //6350FF
+                        fontSize: _fontSize,
+                        color:
+                            const Color.fromARGB(255, 255, 255, 255), //6350FF
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -137,8 +160,8 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
           ],
         ),
       ),
-    );
-  }
-  
-  _launchCall(String number) {
-  }
+    ),
+  );
+}
+
+_launchCall(String number) {}

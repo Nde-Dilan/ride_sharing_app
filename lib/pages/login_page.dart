@@ -26,132 +26,113 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       username = "Mr/Mrs";
     }
+
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('🚔🚨RideShare 🔥🚀'),
+      appBar: AppBar(
+        title: const Text('🚔🚨RideShare 🔥🚀'),
+      ),
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.all(19.0),
+        child: Form(
+          key: _formKey,
+          child: Builder(builder: (context) {
+            return Column(
+              children: <Widget>[
+                Text(
+                  'Login',
+                  style: TextStyle(fontSize: 24 * screenWidth / 400),
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                Text(
+                  'Hi $username, Wecome Back! 👋',
+                  style: TextStyle(fontSize: 24 * screenWidth / 400),
+                ),
+                const SizedBox(
+                  height: 18,
+                ),
+                Text(
+                  "Hello again, you’ve been missed!",
+                  style: TextStyle(fontSize: 17 * screenWidth / 400),
+                ),
+                const SizedBox(
+                  height: 38,
+                ),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  validator: (value) {
+                    validateEmail(value);
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  obscureText: true,
+                  enableSuggestions: false,
+                  autocorrect: false,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                        side: const BorderSide(
+                            color: Color(0xFFFF742F),
+                            width: 2.0,
+                            style: BorderStyle
+                                .solid), // Adjust the radius as needed
+                      )),
+                      minimumSize: MaterialStatePropertyAll(
+                          Size(303 * screenWidth / 400, 54)),
+                      backgroundColor:
+                          const MaterialStatePropertyAll(Color(0xffffffff))),
+                  onPressed: () async {
+                    signInUser(_emailController.text, _passwordController.text);
+                  },
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                        fontSize: 25 * screenWidth / 400,
+                        color: const Color(0xffFF742F), //6350FF
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                orPart(),
+                signInWithGoogleBtn(context)
+              ],
+            );
+          }),
         ),
-        body: SingleChildScrollView(
-          child: FutureBuilder(
-            future: Firebase.initializeApp(
-              options: DefaultFirebaseOptions.currentPlatform,
-            ),
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.done:
-                  return Padding(
-                    padding: const EdgeInsets.all(19.0),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          const Text(
-                            'Login',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                          const SizedBox(
-                            height: 48,
-                          ),
-                          Text(
-                            'Hi $username, Wecome Back! 👋',
-                            style: const TextStyle(fontSize: 24),
-                          ),
-                          const SizedBox(
-                            height: 18,
-                          ),
-                          const Text(
-                            "Hello again, you’ve been missed!",
-                            style: TextStyle(fontSize: 17),
-                          ),
-                          const SizedBox(
-                            height: 38,
-                          ),
-                          TextFormField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            validator: (value) {
-                              validateEmail(value);
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 48,
-                          ),
-                          TextFormField(
-                            controller: _passwordController,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                            ),
-                            obscureText: true,
-                            enableSuggestions: false,
-                            autocorrect: false,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(
-                            height: 48,
-                          ),
-                          TextButton(
-                            style: ButtonStyle(
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  side: const BorderSide(
-                                      color: Color(0xFFFF742F),
-                                      width: 2.0,
-                                      style: BorderStyle
-                                          .solid), // Adjust the radius as needed
-                                )),
-                                minimumSize: const MaterialStatePropertyAll(
-                                    Size(303, 54)),
-                                backgroundColor: const MaterialStatePropertyAll(
-                                    Color(0xffffffff))),
-                            onPressed: () async {
-                              signInUser(_emailController.text,
-                                  _passwordController.text);
-                            },
-                            child: const Text(
-                              "Sign In",
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  color: Color(0xffFF742F), //6350FF
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          orPart(),
-                          signInWithGoogleBtn()
-                        ],
-                      ),
-                    ),
-                  );
-                default:
-                  final double screenHeight =
-                      MediaQuery.of(context).size.height;
-                  return Center(
-                      child: Column(children: [
-                    SizedBox(
-                      height: screenHeight * 0.5,
-                    ),
-                    const CircularProgressIndicator(),
-                    const Text("Loading ... ")
-                  ]));
-              }
-            },
-          ),
-        ));
+      )),
+    );
   }
 
   signInUser(String email, String password) async {
