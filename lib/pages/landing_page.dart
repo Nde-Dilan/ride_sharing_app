@@ -11,8 +11,8 @@ class WelcomePage extends StatelessWidget {
     // Get the screen size
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-    double _fontSizeText = 20;
-    double adjustedFontSize = _fontSizeText * screenWidth / 400;
+    double fontSizeText = 20;
+    double adjustedFontSize = fontSizeText * screenWidth / 400;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -111,7 +111,7 @@ class WelcomePage extends StatelessWidget {
                   "Sign In",
                   style: TextStyle(
                       fontSize: 15 * screenWidth / 400,
-                      color: Color(0xffFF742F), //6350FF
+                      color: const Color(0xffFF742F), //6350FF
                       fontWeight: FontWeight.w500),
                 ),
               ),
@@ -141,11 +141,11 @@ class WelcomePage extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               const Text("2023 © RideShare"),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
             ],

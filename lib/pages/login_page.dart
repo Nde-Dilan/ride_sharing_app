@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ride_sharing_app/firebase_options.dart';
 import 'package:ride_sharing_app/pages/sign_up.dart';
 
 class LoginPage extends StatefulWidget {

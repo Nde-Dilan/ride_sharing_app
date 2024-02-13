@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 //image picker
@@ -13,7 +12,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ride_sharing_app/widgets/checkbox.dart';
 import 'package:ride_sharing_app/widgets/phone_number.dart';
-import '../firebase_options.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -305,7 +303,7 @@ TextButton signInWithGoogleBtn(BuildContext context) {
   return TextButton(
     onPressed: () async {
       UserCredential user = await signInWithGoogle();
-      if (user?.user?.displayName != null) {
+      if (user.user?.displayName != null) {
         Navigator.pushNamed(context, '/home-page');
       }
     },

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ride_sharing_app/driver.dart';
+import 'package:ride_sharing_app/pages/profile_page.dart';
 
 void showRiderPopup(RiderData riderData, BuildContext context) {
   final double screenWidth = MediaQuery.of(context).size.width;
-  final double _fontSize = screenWidth * 0.05;
+  final double fontSize = screenWidth * 0.05;
   showModalBottomSheet(
     context: context,
     builder: (context) => SingleChildScrollView(
@@ -32,11 +33,11 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
               children: [
                 Text(
                   "Name: ",
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(fontSize: fontSize),
                 ),
                 Text(riderData.name,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: _fontSize)),
+                        fontWeight: FontWeight.bold, fontSize: fontSize)),
               ],
             ),
             const SizedBox(height: 20),
@@ -44,11 +45,11 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
               children: [
                 Text(
                   "Vehicle: ",
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(fontSize: fontSize),
                 ),
                 Text(riderData.vehicleType,
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: _fontSize)),
+                        fontWeight: FontWeight.bold, fontSize: fontSize)),
               ],
             ),
             const SizedBox(height: 20),
@@ -56,7 +57,7 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
               children: [
                 Text(
                   "Rating: ",
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(fontSize: fontSize),
                 ),
                 Expanded(
                   child: RatingBar.builder(
@@ -83,7 +84,7 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
               children: [
                 Text(
                   "Available: ",
-                  style: TextStyle(fontSize: _fontSize),
+                  style: TextStyle(fontSize: fontSize),
                 ),
                 Container(
                   width: 20,
@@ -100,15 +101,25 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                                name: riderData.name,
+                                vehicleType: riderData.vehicleType,
+                                phoneNumber: riderData.number,
+                                isActive: riderData.isActive,
+                                rating: riderData.rating,
+                                position: riderData.position,
+                              ))),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 240, 37, 23)),
+                        const Color.fromARGB(255, 21, 184, 224)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                       side: const BorderSide(
-                          color: Color.fromARGB(255, 240, 37, 23),
+                          color: Color.fromARGB(255, 21, 184, 224),
                           width: 2.0,
                           style:
                               BorderStyle.solid), // Adjust the radius as needed
@@ -117,11 +128,10 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
                         MaterialStatePropertyAll(Size(screenWidth * 0.25, 54)),
                   ),
                   child: Text(
-                    "Cancel",
+                    "View Profile",
                     style: TextStyle(
-                        fontSize: _fontSize,
-                        color:
-                            const Color.fromARGB(255, 255, 255, 255), //6350FF
+                        fontSize: fontSize,
+                        color: Color.fromARGB(255, 255, 255, 255), //6350FF
                         fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -149,7 +159,7 @@ void showRiderPopup(RiderData riderData, BuildContext context) {
                   child: Text(
                     "Call Driver",
                     style: TextStyle(
-                        fontSize: _fontSize,
+                        fontSize: fontSize,
                         color:
                             const Color.fromARGB(255, 255, 255, 255), //6350FF
                         fontWeight: FontWeight.w500),
