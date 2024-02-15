@@ -242,10 +242,10 @@ class _SignUpPageState extends State<SignUpPage> {
         await db.collection("users").add(user).then((DocumentReference doc) =>
             print('DocumentSnapshot added with ID: ${doc.id}'));
         // ignore: use_build_context_synchronously
-        Future.delayed(const Duration(seconds: 2), () {
+        
           Navigator.pushNamed(context, '/sign-in',
               arguments: email.split('@').first);
-        });
+        ;
         // ignore: nullable_type_in_catch_clause
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {

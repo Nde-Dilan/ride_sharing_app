@@ -21,8 +21,8 @@ class WelcomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(
-                  // height: 100,
-                  ),
+                height: 100,
+              ),
               Container(
                 width: screenWidth * 0.75, // 75% of screen width
                 height: screenHeight * 0.3, // 40% of screen height

@@ -4,7 +4,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ride_sharing_app/firebase_options.dart';
 import 'package:ride_sharing_app/pages/about_us.dart';
 import 'package:ride_sharing_app/pages/dashboard.dart';
-import 'package:ride_sharing_app/pages/flutter_map_test.dart';
 import 'package:ride_sharing_app/pages/help_center.dart';
 import 'package:ride_sharing_app/pages/home_page.dart';
 import 'package:ride_sharing_app/pages/landing_page.dart';
@@ -12,7 +11,6 @@ import 'package:ride_sharing_app/pages/login_page.dart';
 import 'package:ride_sharing_app/pages/my_profile.dart';
 import 'package:ride_sharing_app/pages/payment_methods.dart';
 import 'package:ride_sharing_app/pages/sign_up.dart';
-import 'package:ride_sharing_app/pages/test.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +22,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of my application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,9 +46,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyAppMap(),
-      home: const MapPage(),
+      // home: const MapPage(),
       // home: const MapSample(),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }

@@ -7,16 +7,22 @@ Ride Sharing App is a cutting-edge application designed to connect drivers and p
 
 ## 📸 Screenshots
 
-| First Screen  | Map Detail | 
-| ------------- | ------------- |
-| ![Main Screen](./captures/landing_page.png)  | ![Ride Detail](./captures/map_page.png) | 
+| First Screen  | Map Detail | Sign In | 
+| ------------- | ------------- | ------------- |
+| ![Main Screen](./captures/landing_page.png)  | ![Map Details](./captures/map_page_hybride.png) | ![Log In](./captures/sign_in.png) |
+
+| Menu Page | About Us |
+ ------------- | ------------- | 
+ ![Ride Detail](./captures/menu.png) | ![Ride Detail](./captures/about_us.png) |
 
 ## 🚀 Features
 
+- 🆕 User Registration
+- 🚗 Driver and passenger dashboard
 - 📍 Real-time location tracking
 - 🚗 Driver and passenger matching
 - 📝 Ride history
-- 💰 In-app payments
+- 💰 In-app payments(Cash only)
 
 ## 🛠️ Installation
 
@@ -52,7 +58,7 @@ flutter test
  * Dart - Optimized for UI, development with less code.
 
 ## 🤝 Contributing
-Contributions, issues and feature requests are welcome! 
+Contributions, issues and feature requests are welcome! Contact [Nde Dilan](mailto:ndedilan504@gmail.com)
 
 ## 👥 Authors
 **Nde Dilan** - Initial work - Nde-Dilan
@@ -63,5 +69,5 @@ This project is licensed under the MIT License - see Google  for details.
 
 ## 🙏 Acknowledgments
  * Thanks to Flutter & Dart for the amazing framework and language.
- * Inspiration : Thanks to the figma and dribble community
+ * Inspiration : Thanks to the figma and dribble community etc...
 

@@ -7,8 +7,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
-import 'package:ride_sharing_app/utils/get_current_location.dart';
-import 'package:ride_sharing_app/utils/get_position.dart';
 import 'dart:convert';
 
 // import 'package:geocoding/geocoding.dart';

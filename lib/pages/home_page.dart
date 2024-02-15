@@ -46,8 +46,13 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
+    // initializeMarkers();
+    // print("Markers: $_markers");
     _currentPosition = getCurrentPosition();
-    _addMarkers();
+  }
+
+  Future<void> initializeMarkers() async {
+    await addMarkers();
   }
 
   Future<Position> getCurrentPosition() {
@@ -71,16 +76,38 @@ class _MapPageState extends State<MapPage> {
         future: _currentPosition,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: Column(
-                children: [
-                  Center(child: CircularProgressIndicator()),
-                  Center(
-                      child: SizedBox(
-                    height: 25,
-                  )),
-                  Center(child: Text("Getting things ready...")),
+            return Scaffold(
+               drawer: drawer(screenWidth, screenHeight),
+              appBar: AppBar(
+                title: const Text("Your Map"),
+                leading: Builder(builder: (context) {
+                  return IconButton(
+                    icon: SvgPicture.asset("assets/icons/menu.svg"),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  );
+                }),
+                actions: [
+                  IconButton(
+                    icon: SvgPicture.asset("assets/icons/Notification.svg"),
+                    onPressed: () {},
+                  )
                 ],
+              ),
+              body: Center(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: screenHeight * 0.4,
+                    ),
+                    const CircularProgressIndicator(),
+                    const SizedBox(
+                      height: 35,
+                    ),
+                    const Text("Getting things ready..."),
+                  ],
+                ),
               ),
             );
           } else if (snapshot.hasError) {
@@ -115,7 +142,17 @@ class _MapPageState extends State<MapPage> {
                         target: LatLng(position.latitude, position.longitude),
                         zoom: 14),
                     polylines: Set<Polyline>.of(polylines.values),
-                    // markers: {_markers.elementAt(0), _markers.elementAt(0)},
+                    markers:  <Marker>{
+                      Marker(
+                          markerId:  const MarkerId('Driver'),
+                          infoWindow:  const InfoWindow(
+                              title: "Car Driver1", snippet: "Cameroon"),
+                          icon: BitmapDescriptor.defaultMarkerWithHue(
+                              BitmapDescriptor.hueGreen),
+                          position: driver1Position,
+                          onTap: () => showRiderPopup(driver1, context)),
+                    },
+                    // markers: {_markers.elementAt(0), _markers.elementAt(1)},
                   ),
                 ],
               ),
@@ -248,7 +285,7 @@ class _MapPageState extends State<MapPage> {
         });
   }
 
-  void _addMarkers() async {
+  addMarkers() async {
     final BitmapDescriptor driverIcon1 =
         await addCustomIcon('assets/icons/Track.png');
     Marker driver1Marker = Marker(
@@ -267,21 +304,12 @@ class _MapPageState extends State<MapPage> {
         position: driver2Position,
         onTap: () => showRiderPopup(driver1, context));
 
-    final BitmapDescriptor passengerIcon =
-        await addCustomIcon('assets/icons/passenger.png');
-    final Marker currentMarker = Marker(
-      markerId: const MarkerId('passenger'),
-      infoWindow:
-          const InfoWindow(title: "Current Position", snippet: "Passenger"),
-      icon: passengerIcon, //TODO: Change the position to the current position
-      position: currentPosition!,
-    );
+    print("Adding markers...");
 
     setState(() {
       _markers
         ..add(driver1Marker)
-        ..add(driver2Marker)
-        ..add(currentMarker);
+        ..add(driver2Marker);
     });
   }
 
